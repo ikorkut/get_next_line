@@ -6,7 +6,7 @@
 /*   By: ikorkut <ikorkut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:19:32 by ikorkut           #+#    #+#             */
-/*   Updated: 2022/12/16 15:18:54 by ikorkut          ###   ########.fr       */
+/*   Updated: 2022/12/23 15:09:56 by ikorkut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_get_line(char *str)
 		return (0);
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char) * i + 1 + new_line);
+	line = malloc(sizeof(char) * i + 1 + new_line);
 	if (!line)
 		return (0);
 	i = 0;
@@ -54,7 +54,7 @@ char	*ft_get_new_str(char *str)
 		free(str);
 		return (0);
 	}
-	new_line = (char *)malloc(sizeof(char) * (j - i) + 1);
+	new_line = malloc(sizeof(char) * (j - i) + 1);
 	if (!new_line)
 		return (0);
 	j = 0;
@@ -78,7 +78,7 @@ char	*ft_get_read(int fd, char *str)
 	while (!ft_strchr(str, '\n') && count != 0)
 	{
 		count = read(fd, now_str, BUFFER_SIZE);
-		if (count < 0)
+		if (count == -1)
 		{
 			free (now_str);
 			return (0);
@@ -95,11 +95,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*str;
 
-	if (fd < 0 && BUFFER_SIZE <= 0)
-	{
-		free(str);
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (0);
-	}
 	str = ft_get_read(fd, str);
 	if (!str)
 		return (0);
@@ -107,18 +104,3 @@ char	*get_next_line(int fd)
 	str = ft_get_new_str(str);
 	return (line);
 }
-/*
-int	main(void)
-{
-	int	fd = open("a.txt", O_RDONLY);
-	char *a = get_next_line(fd);
-	free(a);
-	while (a)
-	{
-		printf("%s", a);
-		a = get_next_line(fd);
-		free(a);
-	}
-	printf("%c", '\n');
-	//system("leaks a.out");
-}*/

@@ -6,17 +6,15 @@
 /*   By: ikorkut <ikorkut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:19:38 by ikorkut           #+#    #+#             */
-/*   Updated: 2022/12/13 15:59:09 by ikorkut          ###   ########.fr       */
+/*   Updated: 2022/12/23 10:40:15 by ikorkut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
